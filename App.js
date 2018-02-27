@@ -66,6 +66,12 @@ break;
 }
 this.setState({ products: tempArr });
       }
+if(this.state.status==='ProductsInTrash'){
+        this.setState({
+            currentProducts: this.state.products.filter((product) =>
+          product.status==='trash')
+        });
+      }
 }
 
   allProducts = () =>{
@@ -84,41 +90,6 @@ this.setState({ products: tempArr });
           currentProducts: this.state.products.filter((product) =>
         product.status==='trash')
       });
-    }
-  }
-
-  onSwipeUp(gestureState) {
-    this.setState({myText: 'You swiped up!'});
-  }
-
-  onSwipeDown(gestureState) {
-    this.setState({myText: 'You swiped down!'});
-  }
-
-  onSwipeLeft(gestureState) {
-    this.setState({myText: 'You swiped left!'});
-  }
-
-  onSwipeRight(gestureState) {
-    this.setState({myText: 'You swiped right!'});
-  }
-
-  onSwipe(gestureName, gestureState) {
-    const {SWIPE_UP, SWIPE_DOWN, SWIPE_LEFT, SWIPE_RIGHT} = swipeDirections;
-    this.setState({gestureName: gestureName});
-    switch (gestureName) {
-      case SWIPE_UP:
-        this.setState({backgroundColor: 'red'});
-        break;
-      case SWIPE_DOWN:
-        this.setState({backgroundColor: 'green'});
-        break;
-      case SWIPE_LEFT:
-        this.setState({backgroundColor: 'blue'});
-        break;
-      case SWIPE_RIGHT:
-        this.setState({backgroundColor: 'yellow'});
-        break;
     }
   }
 
