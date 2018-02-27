@@ -8,10 +8,6 @@ import {
   ScrollView
 } from 'react-native';
 
-import Swiper from 'react-native-swiper';
-
-import GestureRecognizer, {swipeDirections} from 'react-native-swipe-gestures';
-
 import HeaderMain from './src/components/headers/HeaderMain';
 import FooterMain from './src/components/footers/FooterMain';
 import Product from './src/components/Product';
@@ -21,26 +17,56 @@ class foodShop extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      myText: 'I\'m ready to get swiped!',
-      gestureName: 'none',
-      backgroundColor: '#fff',
 
       status:'allProducts',
       currentProducts: null,
 
       products: [
-        {text: 'Milk 1l', status: 'house'},
-        {text: 'Eggs Medium 12 pack', status: 'trash'},
-        {text: 'Fresh Basil', status: 'house'},
-        {text: 'Wholegrain Bread 1 pkg', status: 'trash'},
-        {text: 'Ground Coffee 200g', status: 'trash'},
-        {text: 'Red Wine', status: 'house'},
-        {text: 'Mozzarella Cheese 150g', status: 'house'},
-        {text: 'Orange Juice 1l', status: 'trash'},
-        {text: 'Tomatoes', status: 'house'}
+        {id: 0, text: 'Milk 1l', status: 'house'},
+        {id: 1, text: 'Eggs Medium 12 pack', status: 'trash'},
+        {id: 2, text: 'Fresh Basil', status: 'house'},
+        {id: 3, text: 'Wholegrain Bread 1 pkg', status: 'trash'},
+        {id: 4, text: 'Ground Coffee 200g', status: 'trash'},
+        {id: 5, text: 'Red Wine', status: 'house'},
+        {id: 6, text: 'Mozzarella Cheese 150g', status: 'house'},
+        {id: 7, text: 'Orange Juice 1l', status: 'trash'},
+        {id: 8, text: 'Tomatoes', status: 'house'}
       ]
+
+      // products: [
+      //   {id: Date.now(), text: 'Milk 1l', status: 'house'},
+      //   {id: Date.now(), text: 'Eggs Medium 12 pack', status: 'trash'},
+      //   {id: Date.now(), text: 'Fresh Basil', status: 'house'},
+      //   {id: Date.now(), text: 'Wholegrain Bread 1 pkg', status: 'trash'},
+      //   {id: Date.now(), text: 'Ground Coffee 200g', status: 'trash'},
+      //   {id: Date.now(), text: 'Red Wine', status: 'house'},
+      //   {id: Date.now(), text: 'Mozzarella Cheese 150g', status: 'house'},
+      //   {id: Date.now(), text: 'Orange Juice 1l', status: 'trash'},
+      //   {id: Date.now(), text: 'Tomatoes', status: 'house'}
+      // ]
     };
   }
+
+changeProductStatusToTrash = id => {
+let tempArr = this.state.products;
+for (let i = 0; i < tempArr.length; i++) {
+if(tempArr[i].id === id){
+tempArr[i].status='trash';
+}
+this.setState({ products: tempArr });
+      }
+}
+
+changeProductStatusToHouse = id => {
+let tempArr = this.state.products;
+for (let i = 0; i < tempArr.length; i++) {
+if(tempArr[i].id === id){
+tempArr[i].status='house';
+break;
+}
+this.setState({ products: tempArr });
+      }
+}
 
   allProducts = () =>{
     if(this.state.status!=='allProducts'){
@@ -113,32 +139,22 @@ class foodShop extends Component {
       <ScrollView>
       {
           this.state.currentProducts.map(product =>
-              <Product product={product} />
+              <Product
+              product={product}
+              changeProductStatusToTrash = {this.changeProductStatusToTrash}
+              changeProductStatusToHouse = {this.changeProductStatusToHouse}
+              />
           )
       }
       </ScrollView>
 
-      <GestureRecognizer
-        onSwipe={(direction, state) => this.onSwipe(direction, state)}
-        onSwipeUp={(state) => this.onSwipeUp(state)}
-        onSwipeDown={(state) => this.onSwipeDown(state)}
-        onSwipeLeft={(state) => this.onSwipeLeft(state)}
-        onSwipeRight={(state) => this.onSwipeRight(state)}
-        // config={config}
-        style={{
-          flex: 1,
-          backgroundColor: this.state.backgroundColor
-        }}
-        >
-        <Text>{this.state.myText}</Text>
-        <Text>onSwipe callback received gesture: {this.state.gestureName}</Text>
-      </GestureRecognizer>
       <View>
       <FooterMain
       onlyProductsInTrash = {this.onlyProductsInTrash}
       allProducts = {this.allProducts}
       />
       </View>
+
       </View>
     );
   }
@@ -146,11 +162,11 @@ class foodShop extends Component {
 
 const styles = StyleSheet.create({
   container:{
-    flex: 1
-    // height: 90,
-    // ...Platform.select({
-    //   ios: {paddingTop: 30}
-    // })
+    flex: 1,
+    height: 90,
+    ...Platform.select({
+      ios: {paddingTop: 30}
+    })
   },
 footer:{
   paddingBottom:0
