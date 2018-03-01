@@ -11,7 +11,7 @@ import {
 import MainScreen from './src/components/screens/MainScreen';
 import EditTableScreen from './src/components/screens/EditTableScreen';
 
-class foodShop extends Component {
+export default class FoodShop extends Component {
 
   constructor(props) {
     super(props);
@@ -31,19 +31,27 @@ class foodShop extends Component {
         {id: 6, text: 'Mozzarella Cheese 150g', status: 'house'},
         {id: 7, text: 'Orange Juice 1l', status: 'trash'},
         {id: 8, text: 'Tomatoes', status: 'house'}
-      ]
+      ],
     };
   }
+
+componentWillMount(){
+  this.setState({
+    currentProducts: this.state.products
+  });
+}
+
 
 
 addProduct = () =>{
 alert('addProduct');
 
+
 }
 
 delProduct = id => {
 
-  alert('delProduct id = ' + this.id);
+  alert('delProduct id = ' + id);
 
 //   this.setState({
 //       currentProducts: this.state.products.filter((product) =>
@@ -68,6 +76,7 @@ switchToEditTableScreen = () =>{
 this.setState({ screen: 'EditTableScreen' });
 }
 
+//это костыль, я знаю
 changeProductStatusToTrash = id => {
 let tempArr = this.state.products;
 for (let i = 0; i < tempArr.length; i++) {
@@ -78,6 +87,7 @@ this.setState({ products: tempArr });
     }
 }
 
+//это костыль, я знаю
 changeProductStatusToHouse = id => {
 let tempArr = this.state.products;
 for (let i = 0; i < tempArr.length; i++) {
@@ -114,12 +124,9 @@ if(this.state.status==='ProductsInTrash'){
     }
   }
 
-  render() {
+render() {
 
-    if(this.state.currentProducts===null){
-      this.state.currentProducts = this.state.products;
-    }
-
+//это похоже на костыль
     if(this.state.screen==='MainScreen'){
       if(this.state.status==='ProductsInTrash'){
         this.onlyProductsInTrash();
@@ -186,5 +193,3 @@ footer:{
     fontWeight: 'bold',
   }
 })
-
-export default foodShop;

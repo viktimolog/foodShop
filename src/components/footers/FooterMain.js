@@ -6,7 +6,7 @@ import {
   TouchableOpacity
 } from 'react-native';
 
-export default class footerMain extends Component {
+export default class FooterMain extends Component {
 
 render(){
   return(

@@ -12,7 +12,7 @@ import HeaderMain from '../headers/HeaderMain';
 import FooterMain from '../footers/FooterMain';
 import Product from '../Product';
 
-export default class mainScreen extends Component {
+export default class MainScreen extends Component {
 
   render() {
 
@@ -27,7 +27,7 @@ export default class mainScreen extends Component {
               <Product
               product={product}
               key={product.id}
-              changeProductStatusToTrash = {this.props.changeProductStatusToTrash}//TODO
+              changeProductStatusToTrash = {this.props.changeProductStatusToTrash}
               changeProductStatusToHouse = {this.props.changeProductStatusToHouse}
               />
           )

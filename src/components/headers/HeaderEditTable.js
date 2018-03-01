@@ -7,16 +7,20 @@ import {
   TouchableOpacity
 } from 'react-native';
 
+import ModalWindow from '../ModalWindow';
 
-export default class headerEditTable extends Component {
+
+export default class HeaderEditTable extends Component {
 
 render(){
   return(
 <View style={styles.container}>
 
-<TouchableOpacity onPress={this.props.addProduct}>
-    <Text style={styles.text}>+</Text>
-</TouchableOpacity>
+
+
+<ModalWindow
+addProduct = {this.props.addProduct}
+/>
 
     <Text style={styles.text}>Groceries</Text>
 

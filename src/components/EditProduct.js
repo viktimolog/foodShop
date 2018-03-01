@@ -7,7 +7,7 @@ import {
   TouchableOpacity
 } from 'react-native';
 
-export default class editProduct extends Component {
+export default class EditProduct extends Component {
 
 render(){
 

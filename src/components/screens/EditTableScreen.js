@@ -12,7 +12,7 @@ import HeaderEditTable from '../headers/HeaderEditTable';
 import FooterMain from '../footers/FooterMain'; //TODO такой же вроде
 import EditProduct from '../EditProduct';
 
-export default class editTableScreen extends Component {
+export default class EditTableScreen extends Component {
 
   render() {
     return (

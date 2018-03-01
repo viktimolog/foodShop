@@ -8,7 +8,7 @@ import {
 } from 'react-native';
 
 
-export default class headerMain extends Component {
+export default class HeaderMain extends Component {
 
 render(){
   return(

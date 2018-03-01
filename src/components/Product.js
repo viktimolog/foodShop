@@ -8,7 +8,7 @@ import {
 
 import GestureRecognizer, {swipeDirections} from 'react-native-swipe-gestures';
 
-export default class product extends Component {
+export default class Product extends Component {
   constructor() {
       super();
       this.state = {
