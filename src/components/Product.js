@@ -48,7 +48,6 @@ return(
   <GestureRecognizer
     onSwipe={(direction, state) => this.onSwipe(direction, state)}
     >
-
     <View style={styles.containerHouse}>
     <Text style={styles.text}>{product.text}</Text>
       <Image source={require('../images/house.jpg')} />

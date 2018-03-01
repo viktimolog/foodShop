@@ -8,18 +8,23 @@ import {
 } from 'react-native';
 
 
-export default class headerMain extends Component {
+export default class headerEditTable extends Component {
 
 render(){
   return(
 <View style={styles.container}>
-    <Image source={require('../../images/settings.jpg')} />
+
+<TouchableOpacity onPress={this.props.addProduct}>
+    <Text style={styles.text}>+</Text>
+</TouchableOpacity>
 
     <Text style={styles.text}>Groceries</Text>
 
-<TouchableOpacity onPress={this.props.switchToEditTableScreen}>
-    <Image source={require('../../images/edit.jpg')} />
+<TouchableOpacity onPress={this.props.switchToMainScreen}>
+    <Text style={styles.text}>Done</Text>
 </TouchableOpacity>
+
+
 </View>
   );
   }

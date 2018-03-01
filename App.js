@@ -8,9 +8,8 @@ import {
   ScrollView
 } from 'react-native';
 
-import HeaderMain from './src/components/headers/HeaderMain';
-import FooterMain from './src/components/footers/FooterMain';
-import Product from './src/components/Product';
+import MainScreen from './src/components/screens/MainScreen';
+import EditTableScreen from './src/components/screens/EditTableScreen';
 
 class foodShop extends Component {
 
@@ -20,6 +19,7 @@ class foodShop extends Component {
 
       status:'allProducts',
       currentProducts: null,
+      screen:'MainScreen',
 
       products: [
         {id: 0, text: 'Milk 1l', status: 'house'},
@@ -32,20 +32,41 @@ class foodShop extends Component {
         {id: 7, text: 'Orange Juice 1l', status: 'trash'},
         {id: 8, text: 'Tomatoes', status: 'house'}
       ]
-
-      // products: [
-      //   {id: Date.now(), text: 'Milk 1l', status: 'house'},
-      //   {id: Date.now(), text: 'Eggs Medium 12 pack', status: 'trash'},
-      //   {id: Date.now(), text: 'Fresh Basil', status: 'house'},
-      //   {id: Date.now(), text: 'Wholegrain Bread 1 pkg', status: 'trash'},
-      //   {id: Date.now(), text: 'Ground Coffee 200g', status: 'trash'},
-      //   {id: Date.now(), text: 'Red Wine', status: 'house'},
-      //   {id: Date.now(), text: 'Mozzarella Cheese 150g', status: 'house'},
-      //   {id: Date.now(), text: 'Orange Juice 1l', status: 'trash'},
-      //   {id: Date.now(), text: 'Tomatoes', status: 'house'}
-      // ]
     };
   }
+
+
+addProduct = () =>{
+alert('addProduct');
+
+}
+
+delProduct = id => {
+
+  alert('delProduct id = ' + this.id);
+
+//   this.setState({
+//       currentProducts: this.state.products.filter((product) =>
+//     product.status==='trash')
+//   });
+//
+//
+// let tempArr = {this.state.products.filter(product =>product.id !== id)};
+//
+// this.setState({ products: tempArr });
+
+// this.setState(prevState => ({ products: prevState.products.filter(product =>
+//    product.id !== id) }));
+
+}
+
+switchToMainScreen = () =>{
+  this.setState({ screen: 'MainScreen' });
+  }
+
+switchToEditTableScreen = () =>{
+this.setState({ screen: 'EditTableScreen' });
+}
 
 changeProductStatusToTrash = id => {
 let tempArr = this.state.products;
@@ -54,7 +75,7 @@ if(tempArr[i].id === id){
 tempArr[i].status='trash';
 }
 this.setState({ products: tempArr });
-      }
+    }
 }
 
 changeProductStatusToHouse = id => {
@@ -64,8 +85,8 @@ if(tempArr[i].id === id){
 tempArr[i].status='house';
 break;
 }
+}
 this.setState({ products: tempArr });
-      }
 if(this.state.status==='ProductsInTrash'){
         this.setState({
             currentProducts: this.state.products.filter((product) =>
@@ -95,39 +116,36 @@ if(this.state.status==='ProductsInTrash'){
 
   render() {
 
-    const config = {
-      velocityThreshold: 0.3,
-      directionalOffsetThreshold: 80
-    };
-
     if(this.state.currentProducts===null){
       this.state.currentProducts = this.state.products;
     }
 
-    return (
-      <View style={styles.container}>
-      <HeaderMain />
-      <ScrollView>
-      {
-          this.state.currentProducts.map(product =>
-              <Product
-              product={product}
+    if(this.state.screen==='MainScreen'){
+      if(this.state.status==='ProductsInTrash'){
+        this.onlyProductsInTrash();
+      }
+      return (
+              <MainScreen
+              currentProducts = {this.state.currentProducts}
               changeProductStatusToTrash = {this.changeProductStatusToTrash}
               changeProductStatusToHouse = {this.changeProductStatusToHouse}
+              onlyProductsInTrash = {this.onlyProductsInTrash}
+              allProducts = {this.allProducts}
+              switchToEditTableScreen = {this.switchToEditTableScreen}
               />
-          )
-      }
-      </ScrollView>
+      );
+    }
 
-      <View>
-      <FooterMain
-      onlyProductsInTrash = {this.onlyProductsInTrash}
-      allProducts = {this.allProducts}
-      />
-      </View>
-
-      </View>
-    );
+    else if(this.state.screen==='EditTableScreen'){
+      return (
+              <EditTableScreen
+              products = {this.state.products}
+              switchToMainScreen = {this.switchToMainScreen}
+              delProduct = {this.delProduct}
+              addProduct = {this.addProduct}
+              />
+      );
+    }
   }
 }
 
@@ -170,4 +188,3 @@ footer:{
 })
 
 export default foodShop;
-// export default HeaderMain;
