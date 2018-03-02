@@ -7,7 +7,6 @@ import {
   TouchableOpacity
 } from 'react-native';
 
-
 export default class HeaderMain extends Component {
 
 render(){
@@ -32,9 +31,9 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'space-between',
     flexDirection: 'row',
-    height: 90
+    height: 72
   },
   text:{
-    fontSize:20
+    fontSize: 16
   }
 });

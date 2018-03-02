@@ -19,7 +19,8 @@ return(
 <View style={styles.container}>
 
 <TouchableOpacity onPress={this.handleDelete}>
-<Image source={require('../images/minus.jpg')} />
+<Image source={require('../images/minus.jpg')}
+style={{width: 72, height: 72}}/>
 </TouchableOpacity>
 
 <Text style={styles.text}>{this.props.product.text}</Text>
@@ -33,9 +34,9 @@ const styles = StyleSheet.create({
     paddingLeft: 20,
     alignItems: 'center',
     flexDirection: 'row',
-    height: 90
+    height: 72
   },
   text:{
-    fontSize:20
+    fontSize: 16
   }
 });

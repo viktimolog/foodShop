@@ -13,9 +13,7 @@ export default class Product extends Component {
   constructor() {
       super();
       this.state = {
-
         gestureName: 'none',
-
       };
   }
 
@@ -26,15 +24,13 @@ export default class Product extends Component {
 
       case SWIPE_LEFT:
       if(!this.props.product.trash){
-        // this.props.changeTrashHouse(this.props.product.id);
-        this.props.changeProductStatus(this.props.product.id);
+        this.props.changeTrashHouse(this.props.product.id);
       }
       break;
 
       case SWIPE_RIGHT:
       if(this.props.product.trash){
-        // this.props.changeTrashHouse(this.props.product.id);
-        this.props.changeProductStatus(this.props.product.id);
+        this.props.changeTrashHouse(this.props.product.id);
       }
       break;
     }
@@ -45,7 +41,7 @@ render(){
     product
 } = this.props;
 
-if(!this.props.product.trash){//не нравится мне такой выбор
+if(!this.props.product.trash){
 return(
 
   <GestureRecognizer
@@ -53,7 +49,8 @@ return(
     >
     <View style={styles.containerHouse}>
     <Text style={styles.text}>{product.text}</Text>
-      <Image source={require('../images/house.jpg')} />
+      <Image source={require('../images/house.jpg')}
+      style={{width: 72, height: 72}}/>
     </View>
   </GestureRecognizer>
 );
@@ -64,7 +61,8 @@ return(
             onSwipe={(direction, state) => this.onSwipe(direction, state)}
             >
           <View style={styles.containerTrash}>
-            <Image source={require('../images/trash.jpg')} />
+            <Image source={require('../images/trash.jpg')}
+            style={{width: 72, height: 72}} />
             <Text style={styles.text}>{product.text}</Text>
           </View>
           </GestureRecognizer>
@@ -77,7 +75,7 @@ const styles = StyleSheet.create({
   containerTrash: {
     alignItems: 'center',
     flexDirection: 'row',
-    height: 90,
+    height: 72,
     borderWidth: 0.5,
     borderColor: 'lightgray'
   },
@@ -85,12 +83,12 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'space-between',
     flexDirection: 'row',
-    height: 90,
+    height: 72,
     borderWidth: 0.5,
     borderColor: 'lightgray'
   },
   text:{
-    fontSize:20,
+    fontSize:16,
     paddingLeft: 30
   },
 });

@@ -9,25 +9,21 @@ import {
 
 import ModalWindow from '../ModalWindow';
 
-
 export default class HeaderEditTable extends Component {
 
 render(){
   return(
 <View style={styles.container}>
 
-
-
 <ModalWindow
 addProduct = {this.props.addProduct}
 />
 
-    <Text style={styles.text}>Groceries</Text>
+<Text style={styles.text}>Groceries</Text>
 
 <TouchableOpacity onPress={this.props.switchToMainScreen}>
     <Text style={styles.text}>Done</Text>
 </TouchableOpacity>
-
 
 </View>
   );
@@ -36,14 +32,14 @@ addProduct = {this.props.addProduct}
 
 const styles = StyleSheet.create({
   container: {
-    paddingLeft: 20,
+    paddingLeft: 40,
     paddingRight: 20,
     alignItems: 'center',
     justifyContent: 'space-between',
     flexDirection: 'row',
-    height: 90
+    height: 72
   },
   text:{
-    fontSize:20
+    fontSize:16
   }
 });

@@ -35,10 +35,12 @@ export default class FoodShop extends Component {
     };
   }
 
-addProduct = () =>{
-alert('addProduct');
-
-
+addProduct = newProductName =>{
+let newProduct = {id: Math.random(), text: newProductName, trash: false};
+this.setState({
+  products: [...this.state.products, newProduct]
+});
+alert('You have added the new product:\n'+ newProductName);
 }
 
 delProduct = id => {
@@ -55,26 +57,22 @@ switchToEditTableScreen = () =>{
 this.setState({ screen: 'EditTableScreen' });
 }
 
+
 changeTrashHouse = id => {
-//все равно мне не нравится, элемент добавляется в конец, а не остается на своем месте в списке
-let tmp = this.state.products.filter(product => product.id === id)[0];
+//все норм, но как-то громоздко?
+let swipedProduct = this.state.products.filter(product => product.id === id)[0];
 
-let changedProduct = {id: tmp.id, text: tmp.text, trash: !tmp.trash};
+let index = this.state.products.indexOf(swipedProduct);
 
-this.setState({
-products: [...this.state.products.filter(product => product.id !== id), changedProduct]
+let changedProduct = {id: swipedProduct.id, text: swipedProduct.text
+  , trash: !swipedProduct.trash};
 
-});
-}
+let updatedArrProducts = this.state.products
+                              .filter(product => product.id !== id);
 
-changeProductStatus = id => {//не могу иначе (changeTrashHouse) сделать, чтобы элемент оставался на своем месте, но менял статус
-let tempArr = this.state.products;
-for (let i = 0; i < tempArr.length; i++) {
-if(tempArr[i].id === id){
-tempArr[i].trash = !tempArr[i].trash;
-}
-this.setState({ products: tempArr });
-    }
+updatedArrProducts.splice(index, 0, changedProduct);
+
+this.setState({ products: updatedArrProducts });
 }
 
 getCurrentProducts = () =>{
@@ -113,7 +111,6 @@ render() {
               allProducts = {this.allProducts}
               switchToEditTableScreen = {this.switchToEditTableScreen}
               changeTrashHouse = {this.changeTrashHouse}
-              changeProductStatus = {this.changeProductStatus}
               />
       );
     }
@@ -134,7 +131,7 @@ render() {
 const styles = StyleSheet.create({
   container:{
     flex: 1,
-    height: 90,
+    height: 70,
     ...Platform.select({
       ios: {paddingTop: 30}
     })
@@ -164,7 +161,7 @@ footer:{
   },
   text: {
     color: '#fff',
-    fontSize: 30,
+    fontSize: 24,
     fontWeight: 'bold',
   }
 })

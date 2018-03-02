@@ -11,7 +11,7 @@ import {
 } from 'react-native';
 
 import HeaderEditTable from '../headers/HeaderEditTable';
-import FooterMain from '../footers/FooterMain'; //TODO такой же вроде
+import FooterMain from '../footers/FooterMain';
 import EditProduct from '../EditProduct';
 
 export default class EditTableScreen extends Component {
@@ -47,7 +47,6 @@ render() {
 const styles = StyleSheet.create({
   container:{
     flex: 1,
-    height: 90,
     ...Platform.select({
       ios: {paddingTop: 30}
     })

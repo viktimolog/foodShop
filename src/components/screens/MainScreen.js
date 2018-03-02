@@ -28,7 +28,6 @@ export default class MainScreen extends Component {
               product={product}
               key={product.id}
               changeTrashHouse = {this.props.changeTrashHouse}
-              changeProductStatus = {this.props.changeProductStatus}
               />
           )
       }
@@ -49,7 +48,6 @@ export default class MainScreen extends Component {
 const styles = StyleSheet.create({
   container:{
     flex: 1,
-    height: 90,
     ...Platform.select({
       ios: {paddingTop: 30}
     })

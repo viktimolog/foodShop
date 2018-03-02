@@ -17,7 +17,7 @@ render(){
 </TouchableOpacity>
 
 <TouchableOpacity onPress={this.props.onlyProductsInTrash}>
-    <Image source={require('../../images/onlyTrash.jpg')} />
+    <Image source={require('../../images/onlyTrash.jpg')}/>
 </TouchableOpacity>
 
 </View>
@@ -32,12 +32,9 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'space-between',
     flexDirection: 'row',
-    height: 90
+    height: 72
   },
   text:{
-    fontSize:20
-  },
-  footer:{
-    paddingBottom:0
-  },
+    fontSize: 16
+  }
 });
