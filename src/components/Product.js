@@ -25,16 +25,18 @@ export default class Product extends Component {
     switch (gestureName) {
 
       case SWIPE_LEFT:
-        if(this.props.product.status!=='trash'){
-          this.props.changeProductStatusToTrash(this.props.product.id);
-        }
-        break;
+      if(!this.props.product.trash){
+        // this.props.changeTrashHouse(this.props.product.id);
+        this.props.changeProductStatus(this.props.product.id);
+      }
+      break;
 
       case SWIPE_RIGHT:
-      if(this.props.product.status!=='house'){
-        this.props.changeProductStatusToHouse(this.props.product.id);
+      if(this.props.product.trash){
+        // this.props.changeTrashHouse(this.props.product.id);
+        this.props.changeProductStatus(this.props.product.id);
       }
-        break;
+      break;
     }
   }
 
@@ -43,7 +45,7 @@ render(){
     product
 } = this.props;
 
-if(product.status==='house'){
+if(!this.props.product.trash){//не нравится мне такой выбор
 return(
 
   <GestureRecognizer

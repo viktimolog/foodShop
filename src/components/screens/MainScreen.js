@@ -27,8 +27,8 @@ export default class MainScreen extends Component {
               <Product
               product={product}
               key={product.id}
-              changeProductStatusToTrash = {this.props.changeProductStatusToTrash}
-              changeProductStatusToHouse = {this.props.changeProductStatusToHouse}
+              changeTrashHouse = {this.props.changeTrashHouse}
+              changeProductStatus = {this.props.changeProductStatus}
               />
           )
       }

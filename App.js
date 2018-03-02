@@ -17,20 +17,20 @@ export default class FoodShop extends Component {
     super(props);
     this.state = {
 
-      status:'allProducts',
+      trash: false,
       currentProducts: null,
       screen:'MainScreen',
 
       products: [
-        {id: Math.random(), text: 'Milk 1l', status: 'house'},
-        {id: Math.random(), text: 'Eggs Medium 12 pack', status: 'trash'},
-        {id: Math.random(), text: 'Fresh Basil', status: 'house'},
-        {id: Math.random(), text: 'Wholegrain Bread 1 pkg', status: 'trash'},
-        {id: Math.random(), text: 'Ground Coffee 200g', status: 'trash'},
-        {id: Math.random(), text: 'Red Wine', status: 'house'},
-        {id: Math.random(), text: 'Mozzarella Cheese 150g', status: 'house'},
-        {id: Math.random(), text: 'Orange Juice 1l', status: 'trash'},
-        {id: Math.random(), text: 'Tomatoes', status: 'house'}
+        {id: Math.random(), text: 'Milk 1l', trash: false},
+        {id: Math.random(), text: 'Eggs Medium 12 pack', trash: true},
+        {id: Math.random(), text: 'Fresh Basil', trash: false},
+        {id: Math.random(), text: 'Wholegrain Bread 1 pkg', trash: true},
+        {id: Math.random(), text: 'Ground Coffee 200g', trash: true},
+        {id: Math.random(), text: 'Red Wine', trash: false},
+        {id: Math.random(), text: 'Mozzarella Cheese 150g', trash: false},
+        {id: Math.random(), text: 'Orange Juice 1l', trash: true},
+        {id: Math.random(), text: 'Tomatoes', trash: false}
       ],
     };
   }
@@ -43,11 +43,11 @@ alert('addProduct');
 
 delProduct = id => {
 this.setState({
-  products: this.state.products.filter(product => product.id !== id),
+  products: this.state.products.filter(product => product.id !== id)
 });
 }
 
-switchToMainScreen = () =>{
+switchToMainScreen = () => {
   this.setState({ screen: 'MainScreen' });
   }
 
@@ -55,51 +55,49 @@ switchToEditTableScreen = () =>{
 this.setState({ screen: 'EditTableScreen' });
 }
 
-//это костыль, я знаю
-changeProductStatusToTrash = id => {
+changeTrashHouse = id => {
+//все равно мне не нравится, элемент добавляется в конец, а не остается на своем месте в списке
+let tmp = this.state.products.filter(product => product.id === id)[0];
+
+let changedProduct = {id: tmp.id, text: tmp.text, trash: !tmp.trash};
+
+this.setState({
+products: [...this.state.products.filter(product => product.id !== id), changedProduct]
+
+});
+}
+
+changeProductStatus = id => {//не могу иначе (changeTrashHouse) сделать, чтобы элемент оставался на своем месте, но менял статус
 let tempArr = this.state.products;
 for (let i = 0; i < tempArr.length; i++) {
 if(tempArr[i].id === id){
-tempArr[i].status='trash';
+tempArr[i].trash = !tempArr[i].trash;
 }
 this.setState({ products: tempArr });
     }
 }
 
-//это костыль, я знаю
-changeProductStatusToHouse = id => {
-let tempArr = this.state.products;
-for (let i = 0; i < tempArr.length; i++) {
-if(tempArr[i].id === id){
-tempArr[i].status='house';
-break;
-}
-}
-this.setState({ products: tempArr });
-}
-
 getCurrentProducts = () =>{
-if(this.state.status==='allProducts'){
+if(!this.state.trash){
 return this.state.products;
 }
-if(this.state.status==='ProductsInTrash'){
-return this.state.products.filter((product) =>
-product.status==='trash');
+else{
+  return this.state.products.filter((product) => product.trash);
 }
 }
 
-  allProducts = () =>{
-    if(this.state.status!=='allProducts'){
+  allProducts = () => {
+    if(this.state.trash){//don't render if all products have already selected
       this.setState({
-        status:'allProducts'
+        trash: false
       });
     }
   }
 
-onlyProductsInTrash = () =>{
-    if(this.state.status!=='ProductsInTrash'){
+onlyProductsInTrash = () => {
+    if(!this.state.trash){//don't render if trash has already selected
       this.setState({
-          status:'ProductsInTrash'
+          trash: true
       });
     }
   }
@@ -111,11 +109,11 @@ render() {
       return (
               <MainScreen
               currentProducts = {this.getCurrentProducts()}
-              changeProductStatusToTrash = {this.changeProductStatusToTrash}
-              changeProductStatusToHouse = {this.changeProductStatusToHouse}
               onlyProductsInTrash = {this.onlyProductsInTrash}
               allProducts = {this.allProducts}
               switchToEditTableScreen = {this.switchToEditTableScreen}
+              changeTrashHouse = {this.changeTrashHouse}
+              changeProductStatus = {this.changeProductStatus}
               />
       );
     }
