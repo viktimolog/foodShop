@@ -3,7 +3,8 @@ import {
   StyleSheet,
   Image,
   Text,
-  View
+  View,
+  TouchableOpacity
 } from 'react-native';
 
 import GestureRecognizer, {swipeDirections} from 'react-native-swipe-gestures';
@@ -74,13 +75,17 @@ const styles = StyleSheet.create({
   containerTrash: {
     alignItems: 'center',
     flexDirection: 'row',
-    height: 90
+    height: 90,
+    borderWidth: 0.5,
+    borderColor: 'lightgray'
   },
   containerHouse: {
     alignItems: 'center',
     justifyContent: 'space-between',
     flexDirection: 'row',
-    height: 90
+    height: 90,
+    borderWidth: 0.5,
+    borderColor: 'lightgray'
   },
   text:{
     fontSize:20,

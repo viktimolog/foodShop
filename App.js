@@ -22,26 +22,18 @@ export default class FoodShop extends Component {
       screen:'MainScreen',
 
       products: [
-        {id: 0, text: 'Milk 1l', status: 'house'},
-        {id: 1, text: 'Eggs Medium 12 pack', status: 'trash'},
-        {id: 2, text: 'Fresh Basil', status: 'house'},
-        {id: 3, text: 'Wholegrain Bread 1 pkg', status: 'trash'},
-        {id: 4, text: 'Ground Coffee 200g', status: 'trash'},
-        {id: 5, text: 'Red Wine', status: 'house'},
-        {id: 6, text: 'Mozzarella Cheese 150g', status: 'house'},
-        {id: 7, text: 'Orange Juice 1l', status: 'trash'},
-        {id: 8, text: 'Tomatoes', status: 'house'}
+        {id: Math.random(), text: 'Milk 1l', status: 'house'},
+        {id: Math.random(), text: 'Eggs Medium 12 pack', status: 'trash'},
+        {id: Math.random(), text: 'Fresh Basil', status: 'house'},
+        {id: Math.random(), text: 'Wholegrain Bread 1 pkg', status: 'trash'},
+        {id: Math.random(), text: 'Ground Coffee 200g', status: 'trash'},
+        {id: Math.random(), text: 'Red Wine', status: 'house'},
+        {id: Math.random(), text: 'Mozzarella Cheese 150g', status: 'house'},
+        {id: Math.random(), text: 'Orange Juice 1l', status: 'trash'},
+        {id: Math.random(), text: 'Tomatoes', status: 'house'}
       ],
     };
   }
-
-componentWillMount(){
-  this.setState({
-    currentProducts: this.state.products
-  });
-}
-
-
 
 addProduct = () =>{
 alert('addProduct');
@@ -50,22 +42,9 @@ alert('addProduct');
 }
 
 delProduct = id => {
-
-  alert('delProduct id = ' + id);
-
-//   this.setState({
-//       currentProducts: this.state.products.filter((product) =>
-//     product.status==='trash')
-//   });
-//
-//
-// let tempArr = {this.state.products.filter(product =>product.id !== id)};
-//
-// this.setState({ products: tempArr });
-
-// this.setState(prevState => ({ products: prevState.products.filter(product =>
-//    product.id !== id) }));
-
+this.setState({
+  products: this.state.products.filter(product => product.id !== id),
+});
 }
 
 switchToMainScreen = () =>{
@@ -97,29 +76,30 @@ break;
 }
 }
 this.setState({ products: tempArr });
+}
+
+getCurrentProducts = () =>{
+if(this.state.status==='allProducts'){
+return this.state.products;
+}
 if(this.state.status==='ProductsInTrash'){
-        this.setState({
-            currentProducts: this.state.products.filter((product) =>
-          product.status==='trash')
-        });
-      }
+return this.state.products.filter((product) =>
+product.status==='trash');
+}
 }
 
   allProducts = () =>{
     if(this.state.status!=='allProducts'){
       this.setState({
-        status:'allProducts',
-        currentProducts: this.state.products
+        status:'allProducts'
       });
     }
   }
 
-  onlyProductsInTrash = () =>{
+onlyProductsInTrash = () =>{
     if(this.state.status!=='ProductsInTrash'){
       this.setState({
-          status:'ProductsInTrash',
-          currentProducts: this.state.products.filter((product) =>
-        product.status==='trash')
+          status:'ProductsInTrash'
       });
     }
   }
@@ -128,12 +108,9 @@ render() {
 
 //это похоже на костыль
     if(this.state.screen==='MainScreen'){
-      if(this.state.status==='ProductsInTrash'){
-        this.onlyProductsInTrash();
-      }
       return (
               <MainScreen
-              currentProducts = {this.state.currentProducts}
+              currentProducts = {this.getCurrentProducts()}
               changeProductStatusToTrash = {this.changeProductStatusToTrash}
               changeProductStatusToHouse = {this.changeProductStatusToHouse}
               onlyProductsInTrash = {this.onlyProductsInTrash}

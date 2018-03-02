@@ -9,13 +9,16 @@ import {
 
 export default class EditProduct extends Component {
 
-render(){
+handleDelete = () => {
+this.props.delProduct(this.props.product.id);
+}
 
+render(){
 return(
 
 <View style={styles.container}>
 
-<TouchableOpacity onPress={this.props.delProduct}>
+<TouchableOpacity onPress={this.handleDelete}>
 <Image source={require('../images/minus.jpg')} />
 </TouchableOpacity>
 

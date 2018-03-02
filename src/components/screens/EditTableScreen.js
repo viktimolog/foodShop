@@ -5,7 +5,9 @@ import {
   Text,
   View,
   Platform,
-  ScrollView
+  ScrollView,
+  Image,
+  TouchableOpacity
 } from 'react-native';
 
 import HeaderEditTable from '../headers/HeaderEditTable';
@@ -14,7 +16,7 @@ import EditProduct from '../EditProduct';
 
 export default class EditTableScreen extends Component {
 
-  render() {
+render() {
     return (
       <View style={styles.container}>
 
@@ -26,11 +28,11 @@ export default class EditTableScreen extends Component {
        <ScrollView>
        {
            this.props.products.map(product =>
+
                <EditProduct
                product={product}
                key={product.id}
                delProduct = {this.props.delProduct}
-
                />
            )
        }
