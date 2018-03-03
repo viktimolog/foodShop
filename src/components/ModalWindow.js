@@ -1,10 +1,13 @@
 import React, {Component} from 'react';
-import {Modal, StyleSheet, Text, TouchableHighlight, View, TextInput} from 'react-native';
+import { Modal, StyleSheet, Text, TouchableHighlight, View
+  , TextInput } from 'react-native';
 
 export default class ModalWindow extends Component {
+
   state = {
     modalVisible: false,
-    newProductName:''
+    newProductName:'',
+    maxLength: 27
   };
 
   addNewProductHandler = () => {
@@ -12,26 +15,24 @@ export default class ModalWindow extends Component {
       return;
     }
 
-    if (this.state.newProductName.length>27){
-    this.props.addProduct(this.state.newProductName.substr(0,26));
-    }
-    else{
-      this.props.addProduct(this.state.newProductName);
-    }
+    this.props.addProduct(this.state.newProductName);
 
-    this.setState({
-      newProductName:''
-    });
-  };
+    this.setModalVisible(!this.state.modalVisible);
+  }
 
   newProductNameHandler = val => {
-    this.setState({
-      newProductName: val
-    });
-  };
+      if(val.length <= this.state.maxLength){
+        this.setState({
+          newProductName: val,
+        });
+      }
+    }
 
   setModalVisible(visible) {
-    this.setState({modalVisible: visible});
+    this.setState({
+      modalVisible: visible,
+      newProductName:''
+    });
   }
 
   render() {
@@ -74,7 +75,9 @@ export default class ModalWindow extends Component {
             >
             </TextInput>
 
-            <Text style={styles.textRight}>Characters left 27</Text>
+            <Text style={styles.textRight}>Characters left{"\u00A0"}
+            {this.state.maxLength-this.state.newProductName.length}
+            </Text>
             </View>
 
           </View>

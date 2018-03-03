@@ -38,7 +38,13 @@ render() {
        }
        </ScrollView>
 
-       <FooterMain />
+       <View>
+       <FooterMain
+       onlyProductsInTrash = {this.props.onlyProductsInTrash}
+       allProducts = {this.props.allProducts}
+       />
+       </View>
+       
       </View>
     );
   }

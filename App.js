@@ -37,10 +37,10 @@ export default class FoodShop extends Component {
 
 addProduct = newProductName =>{
 let newProduct = {id: Math.random(), text: newProductName, trash: false};
+
 this.setState({
-  products: [...this.state.products, newProduct]
+  products: [newProduct, ...this.state.products]
 });
-alert('You have added the new product:\n'+ newProductName);
 }
 
 delProduct = id => {
@@ -59,7 +59,6 @@ this.setState({ screen: 'EditTableScreen' });
 
 
 changeTrashHouse = id => {
-//все норм, но как-то громоздко?
 let swipedProduct = this.state.products.filter(product => product.id === id)[0];
 
 let index = this.state.products.indexOf(swipedProduct);
@@ -84,7 +83,7 @@ else{
 }
 }
 
-  allProducts = () => {
+allProducts = () => {
     if(this.state.trash){//don't render if all products have already selected
       this.setState({
         trash: false
@@ -102,7 +101,6 @@ onlyProductsInTrash = () => {
 
 render() {
 
-//это похоже на костыль
     if(this.state.screen==='MainScreen'){
       return (
               <MainScreen
@@ -118,7 +116,9 @@ render() {
     else if(this.state.screen==='EditTableScreen'){
       return (
               <EditTableScreen
-              products = {this.state.products}
+              products = {this.getCurrentProducts()}
+              onlyProductsInTrash = {this.onlyProductsInTrash}
+              allProducts = {this.allProducts}
               switchToMainScreen = {this.switchToMainScreen}
               delProduct = {this.delProduct}
               addProduct = {this.addProduct}
@@ -131,37 +131,8 @@ render() {
 const styles = StyleSheet.create({
   container:{
     flex: 1,
-    height: 70,
     ...Platform.select({
       ios: {paddingTop: 30}
     })
-  },
-footer:{
-  paddingBottom:0
-},
-  wrapper: {
-  },
-  slide1: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: '#9DD6EB',
-  },
-  slide2: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: '#97CAE5',
-  },
-  slide3: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: '#92BBD9',
-  },
-  text: {
-    color: '#fff',
-    fontSize: 24,
-    fontWeight: 'bold',
   }
 })
