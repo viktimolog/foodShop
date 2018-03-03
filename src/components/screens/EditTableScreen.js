@@ -13,6 +13,7 @@ import {
 import HeaderEditTable from '../headers/HeaderEditTable';
 import FooterMain from '../footers/FooterMain';
 import EditProduct from '../EditProduct';
+import styles from '../../Styles';
 
 export default class EditTableScreen extends Component {
 
@@ -44,17 +45,8 @@ render() {
        allProducts = {this.props.allProducts}
        />
        </View>
-       
+
       </View>
     );
   }
 }
-
-const styles = StyleSheet.create({
-  container:{
-    flex: 1,
-    ...Platform.select({
-      ios: {paddingTop: 30}
-    })
-  }
-})

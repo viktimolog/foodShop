@@ -33,8 +33,5 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
     flexDirection: 'row',
     height: 72
-  },
-  text:{
-    fontSize: 16
   }
 });

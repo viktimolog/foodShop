@@ -5,18 +5,21 @@ import {
   Text,
   View,
   Platform,
-  ScrollView
+  ScrollView,
+  BackHandler
 } from 'react-native';
 
 import MainScreen from './src/components/screens/MainScreen';
 import EditTableScreen from './src/components/screens/EditTableScreen';
+import styles from './src/Styles';
 
 export default class FoodShop extends Component {
 
-  constructor(props) {
+constructor(props) {
     super(props);
-    this.state = {
+    this.backButtonListener = null;
 
+    this.state = {
       trash: false,
       currentProducts: null,
       screen:'MainScreen',
@@ -34,6 +37,22 @@ export default class FoodShop extends Component {
       ],
     };
   }
+
+componentDidMount() {
+if (Platform.OS === 'android') {
+  this.backButtonListener = BackHandler.addEventListener('hardwareBackPress', () => {
+      if (this.state.screen !== 'MainScreen') {
+      this.switchToMainScreen();
+       return true;
+      }
+      return false;
+    });
+  }
+}
+
+componentWillUnmount() {
+this.backButtonListener.remove();
+}
 
 addProduct = newProductName =>{
 let newProduct = {id: Math.random(), text: newProductName, trash: false};
@@ -84,7 +103,7 @@ else{
 }
 
 allProducts = () => {
-    if(this.state.trash){//don't render if all products have already selected
+    if(this.state.trash){
       this.setState({
         trash: false
       });
@@ -92,7 +111,7 @@ allProducts = () => {
   }
 
 onlyProductsInTrash = () => {
-    if(!this.state.trash){//don't render if trash has already selected
+    if(!this.state.trash){
       this.setState({
           trash: true
       });
@@ -127,12 +146,3 @@ render() {
     }
   }
 }
-
-const styles = StyleSheet.create({
-  container:{
-    flex: 1,
-    ...Platform.select({
-      ios: {paddingTop: 30}
-    })
-  }
-})

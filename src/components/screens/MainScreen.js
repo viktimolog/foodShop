@@ -11,6 +11,7 @@ import {
 import HeaderMain from '../headers/HeaderMain';
 import FooterMain from '../footers/FooterMain';
 import Product from '../Product';
+import styles from '../../Styles';
 
 export default class MainScreen extends Component {
 
@@ -44,12 +45,3 @@ export default class MainScreen extends Component {
     );
   }
 }
-
-const styles = StyleSheet.create({
-  container:{
-    flex: 1,
-    ...Platform.select({
-      ios: {paddingTop: 30}
-    })
-  }
-})
