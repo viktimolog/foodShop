@@ -102,32 +102,21 @@ else{
 }
 }
 
-allProducts = () => {
-    if(this.state.trash){
-      this.setState({
-        trash: false
-      });
-    }
-  }
-
-onlyProductsInTrash = () => {
-    if(!this.state.trash){
-      this.setState({
-          trash: true
-      });
-    }
-  }
+setAllProductsOrOnlyInTrash = () => {
+  this.setState({
+    trash: !this.state.trash
+  });
+}
 
 render() {
-
     if(this.state.screen==='MainScreen'){
       return (
               <MainScreen
               currentProducts = {this.getCurrentProducts()}
-              onlyProductsInTrash = {this.onlyProductsInTrash}
-              allProducts = {this.allProducts}
+              setAllProductsOrOnlyInTrash = {this.setAllProductsOrOnlyInTrash}
               switchToEditTableScreen = {this.switchToEditTableScreen}
               changeTrashHouse = {this.changeTrashHouse}
+              trash = {this.state.trash}
               />
       );
     }
@@ -136,11 +125,11 @@ render() {
       return (
               <EditTableScreen
               products = {this.getCurrentProducts()}
-              onlyProductsInTrash = {this.onlyProductsInTrash}
-              allProducts = {this.allProducts}
+              setAllProductsOrOnlyInTrash = {this.setAllProductsOrOnlyInTrash}
               switchToMainScreen = {this.switchToMainScreen}
               delProduct = {this.delProduct}
               addProduct = {this.addProduct}
+              trash = {this.state.trash}
               />
       );
     }

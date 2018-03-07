@@ -41,8 +41,8 @@ render() {
 
        <View>
        <FooterMain
-       onlyProductsInTrash = {this.props.onlyProductsInTrash}
-       allProducts = {this.props.allProducts}
+       setAllProductsOrOnlyInTrash = {this.props.setAllProductsOrOnlyInTrash}
+       trash = {this.props.trash}
        />
        </View>
 

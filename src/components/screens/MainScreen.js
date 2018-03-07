@@ -16,7 +16,6 @@ import styles from '../../Styles';
 export default class MainScreen extends Component {
 
   render() {
-
     return (
       <View style={styles.container}>
       <HeaderMain
@@ -36,8 +35,8 @@ export default class MainScreen extends Component {
 
       <View>
       <FooterMain
-      onlyProductsInTrash = {this.props.onlyProductsInTrash}
-      allProducts = {this.props.allProducts}
+      setAllProductsOrOnlyInTrash = {this.props.setAllProductsOrOnlyInTrash}
+      trash = {this.props.trash}
       />
       </View>
 

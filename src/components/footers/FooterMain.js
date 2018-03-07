@@ -7,16 +7,21 @@ import {
 } from 'react-native';
 
 export default class FooterMain extends Component {
-
 render(){
-  return(
+return(
 <View style={styles.container}>
 
-<TouchableOpacity onPress={this.props.allProducts}>
+<TouchableOpacity
+disabled={!this.props.trash}
+onPress={this.props.setAllProductsOrOnlyInTrash}
+ >
     <Image source={require('../../images/allList.jpg')} />
 </TouchableOpacity>
 
-<TouchableOpacity onPress={this.props.onlyProductsInTrash}>
+<TouchableOpacity
+disabled={this.props.trash}
+onPress={this.props.setAllProductsOrOnlyInTrash}
+>
     <Image source={require('../../images/onlyTrash.jpg')}/>
 </TouchableOpacity>
 
