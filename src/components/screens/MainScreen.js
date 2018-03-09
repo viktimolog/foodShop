@@ -9,7 +9,6 @@ import {
 } from 'react-native';
 
 import HeaderMain from '../headers/HeaderMain';
-import FooterMain from '../footers/FooterMain';
 import Product from '../Product';
 import styles from '../../Styles';
 
