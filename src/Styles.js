@@ -4,7 +4,7 @@ export default StyleSheet.create({
   container:{
     flex: 1,
     ...Platform.select({
-      ios: {paddingTop: 30}
+      ios: {paddingTop: 5}
     })
   }
 })
