@@ -11,7 +11,6 @@ import {
 } from 'react-native';
 
 import HeaderEditTable from '../headers/HeaderEditTable';
-import FooterMain from '../footers/FooterMain';
 import EditProduct from '../EditProduct';
 import styles from '../../Styles';
 
