@@ -11,6 +11,7 @@ import {
 
 import MainScreen from './src/components/screens/MainScreen';
 import EditTableScreen from './src/components/screens/EditTableScreen';
+import FooterMain from './src/components/footers/FooterMain';
 import styles from './src/Styles';
 
 export default class FoodShop extends Component {
@@ -108,30 +109,41 @@ setAllProductsOrOnlyInTrash = () => {
   });
 }
 
-render() {
-    if(this.state.screen==='MainScreen'){
-      return (
-              <MainScreen
-              currentProducts = {this.getCurrentProducts()}
-              setAllProductsOrOnlyInTrash = {this.setAllProductsOrOnlyInTrash}
-              switchToEditTableScreen = {this.switchToEditTableScreen}
-              changeTrashHouse = {this.changeTrashHouse}
-              trash = {this.state.trash}
-              />
-      );
-    }
+getScreen = () => {
+if(this.state.screen==='MainScreen'){
+  return(
+    <MainScreen
+    currentProducts = {this.getCurrentProducts()}
+    setAllProductsOrOnlyInTrash = {this.setAllProductsOrOnlyInTrash}
+    switchToEditTableScreen = {this.switchToEditTableScreen}
+    changeTrashHouse = {this.changeTrashHouse}
+    trash = {this.state.trash}
+    />
+  );
+ }
+ else if(this.state.screen==='EditTableScreen'){
+   return (
+     <EditTableScreen
+      products = {this.getCurrentProducts()}
+      setAllProductsOrOnlyInTrash = {this.setAllProductsOrOnlyInTrash}
+      switchToMainScreen = {this.switchToMainScreen}
+      delProduct = {this.delProduct}
+      addProduct = {this.addProduct}
+      trash = {this.state.trash}
+      />
+   );
+ }
+}
 
-    else if(this.state.screen==='EditTableScreen'){
+render() {
       return (
-              <EditTableScreen
-              products = {this.getCurrentProducts()}
-              setAllProductsOrOnlyInTrash = {this.setAllProductsOrOnlyInTrash}
-              switchToMainScreen = {this.switchToMainScreen}
-              delProduct = {this.delProduct}
-              addProduct = {this.addProduct}
-              trash = {this.state.trash}
-              />
+        <View style={styles.container}>
+        {this.getScreen()}
+        <FooterMain
+        setAllProductsOrOnlyInTrash = {this.setAllProductsOrOnlyInTrash}
+        trash = {this.state.trash}
+        />
+        </View>
       );
-    }
-  }
+   }
 }

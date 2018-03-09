@@ -32,14 +32,6 @@ export default class MainScreen extends Component {
           )
       }
       </ScrollView>
-
-      <View>
-      <FooterMain
-      setAllProductsOrOnlyInTrash = {this.props.setAllProductsOrOnlyInTrash}
-      trash = {this.props.trash}
-      />
-      </View>
-
       </View>
     );
   }

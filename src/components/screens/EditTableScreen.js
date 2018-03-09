@@ -20,12 +20,10 @@ export default class EditTableScreen extends Component {
 render() {
     return (
       <View style={styles.container}>
-
       <HeaderEditTable
       switchToMainScreen = {this.props.switchToMainScreen}
       addProduct = {this.props.addProduct}
        />
-
        <ScrollView>
        {
            this.props.products.map(product =>
@@ -38,14 +36,6 @@ render() {
            )
        }
        </ScrollView>
-
-       <View>
-       <FooterMain
-       setAllProductsOrOnlyInTrash = {this.props.setAllProductsOrOnlyInTrash}
-       trash = {this.props.trash}
-       />
-       </View>
-
       </View>
     );
   }
