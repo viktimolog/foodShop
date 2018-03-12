@@ -9,11 +9,7 @@
   "dependencies": {
     "react": "16.2.0",
     "react-native": "0.53.3",
-    "react-native-swipe": "^1.0.0",
-    "react-native-swipe-gestures": "^1.0.2",
-    "react-native-swiper": "^1.5.13",
-    "react-redux": "^5.0.7",
-    "redux": "^3.7.2"
+    "react-native-swipe-gestures": "^1.0.2"
   },
   "devDependencies": {
     "babel-jest": "22.4.1",
@@ -24,4 +20,4 @@
   "jest": {
     "preset": "react-native"
   }
-}
+} 
