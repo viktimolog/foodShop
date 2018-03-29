@@ -1,11 +1,7 @@
-import React, { Component } from 'react';
+import React, {Component} from 'react';
 import {
-  AppRegistry,
-  StyleSheet,
-  Text,
-  View,
-  Platform,
-  ScrollView
+    View,
+    ScrollView
 } from 'react-native';
 
 import HeaderMain from '../headers/HeaderMain';
@@ -13,25 +9,20 @@ import Product from '../Product';
 import styles from '../../Styles';
 
 export default class MainScreen extends Component {
-
-  render() {
-    return (
-      <View style={styles.container}>
-      <HeaderMain
-      switchToEditTableScreen = {this.props.switchToEditTableScreen}
-      />
-      <ScrollView>
-      {
-          this.props.currentProducts.map(product =>
-              <Product
-              product={product}
-              key={product.id}
-              changeTrashHouse = {this.props.changeTrashHouse}
-              />
-          )
-      }
-      </ScrollView>
-      </View>
-    );
-  }
+    render() {
+        return (
+            <View style={styles.container}>
+                <HeaderMain
+                    switchToEditTableScreen={this.props.switchToEditTableScreen}/>
+                <ScrollView>
+                    {
+                        this.props.currentProducts.map(product =>
+                            <Product
+                                product={product}
+                                key={product.id}
+                                changeTrashHouse={this.props.changeTrashHouse}/>)
+                    }
+                </ScrollView>
+            </View>);
+    }
 }
